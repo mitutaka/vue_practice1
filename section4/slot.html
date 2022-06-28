@@ -23,43 +23,28 @@
 
   <body>
     <div id="app" class="parent">
-      <!-- <custom-input
-      :value="parentValue"
-       @input="parentValue = $event" class="child"></custom-input> -->
-      <custom-input
-       v-model="parentValue"
-        class="child"></custom-input>
+      <child-component class="child">親の文字です</child-component>
 
-      {{ parentValue }}
+      <child-component class="child">
+        <child-component class="child"></child-component>
+      </child-component>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 
     <script>
-      let customInput = {
-        props: {
-          value: {
-            type: String
-          }
-        },
+      let childComponent = {
         template: `<div>
-          <input :value="value" @input="childEvent">
-          </div>`,
-        methods: {
-          childEvent(e) {
-            this.$emit('input', e.target.value)
-          }
-        }
+          久保 <slot>南野</slot> 堂安</div>`
       }
-
       let app = new Vue({
         el: '#app',
-        components: {
-          customInput
-        },
         data() {
           return {
-            parentValue: ''
           }
+        },
+        components: {
+          childComponent
         }
       })
     </script>

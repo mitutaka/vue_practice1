@@ -22,44 +22,41 @@
   </head>
 
   <body>
-    <div id="app" class="parent">
-      <!-- <custom-input
-      :value="parentValue"
-       @input="parentValue = $event" class="child"></custom-input> -->
-      <custom-input
-       v-model="parentValue"
-        class="child"></custom-input>
 
-      {{ parentValue }}
+    <div id="app" class="parent">
+      <my-com class="child">
+        <template v-slot:header>
+          ヘッダー
+        </template>
+        mainに入ります
+        <template #footer>
+          フッター
+        </template>
+        ここもmainに入ります
+      </my-com>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 
     <script>
-      let customInput = {
-        props: {
-          value: {
-            type: String
-          }
-        },
+      let myCom = {
         template: `<div>
-          <input :value="value" @input="childEvent">
-          </div>`,
-        methods: {
-          childEvent(e) {
-            this.$emit('input', e.target.value)
-          }
-        }
+          <slot name="header">
+            header
+            </slot>
+            <slot name="default">main contents</slot>
+            <slot name="footer">
+              footer
+              </slot>
+              </div>`
       }
-
       let app = new Vue({
         el: '#app',
-        components: {
-          customInput
-        },
         data() {
           return {
-            parentValue: ''
           }
+        },
+        components: {
+          myCom
         }
       })
     </script>
