@@ -7,11 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.3.10/dist/vuetify.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <title>犬の写真</title>
-  <style>
-    [v-cloak] {
-      display: none;
-    }
-  </style>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -69,14 +69,14 @@
             const that = this
             this.dogUrl = `https://dog.ceo/api/breed/${this.dogTypes[index]}/images`
             const response = await fetch(this.dogUrl, { method: 'get' })
-            .then(response => {
-              if (response.ok) {
-                that.isShow = true
-                return response.json()
-              }
-              throw new Error('error')
-                .catch(e => console.log(e.message))
-            })
+              .then(response => {
+                if (response.ok) {
+                  that.isShow = true
+                  return response.json()
+                }
+                throw new Error('error')
+                  .catch(e => console.log(e.message))
+              })
             this.render(response)
           },
           render(response) {

@@ -10,9 +10,11 @@
       [v-cloak] {
         display: none;
       }
+
       ul {
         list-style: none;
       }
+
       .done {
         text-decoration: line-through;
       }
@@ -48,8 +50,8 @@
           }
         },
         methods: {
-          addItem(){
-            if(!this.newItem) return
+          addItem() {
+            if (!this.newItem) return
             const todo = {
               item: this.newItem,
               isDone: false
@@ -57,14 +59,14 @@
             this.todos.push(todo)
             this.newItem = ''
           },
-          deleteItem(index){
+          deleteItem(index) {
             this.todos.splice(index, 1)
           }
         },
         computed: {
           filteredList() {
             let that = this
-            return this.todos.filter( todo => {
+            return this.todos.filter(todo => {
               return todo.item.indexOf(that.query) !== -1
             })
           }
