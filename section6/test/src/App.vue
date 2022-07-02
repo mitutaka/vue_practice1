@@ -9,6 +9,7 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import TestComponent from './modules/TestComponent.vue'
+
 export default {
   name: 'App',
   components: {
