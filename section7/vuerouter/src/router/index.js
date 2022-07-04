@@ -8,6 +8,7 @@ import Item from "../views/Item.vue";
 import User from "@/views/User.vue";
 import UserProfile from "@/components/UserProfile.vue";
 import UserPost from "@/components/UserPost.vue";
+import HomeSub from "@/components/HomeSub.vue";
 
 Vue.use(VueRouter);
 
@@ -15,7 +16,10 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    components: {
+      default: HomeView,
+      sub: HomeSub,
+    },
   },
   {
     path: "/about",
@@ -45,20 +49,23 @@ const routes = [
     path: "/item/:id",
     name: "Item",
     component: Item,
+    // beforeEnter: (to, from, next) => {
+
+    // }
   },
   {
-    path: '/user',
+    path: "/user",
     component: User,
     children: [
       {
-        path: 'profile',
-        component: UserProfile
+        path: "profile",
+        component: UserProfile,
       },
       {
-        path: 'post',
-        component: UserPost
-      }
-    ]
+        path: "post",
+        component: UserPost,
+      },
+    ],
   },
   {
     path: "*",
@@ -73,5 +80,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   console.log(to);
+//   console.log(from);
+//   next();
+// });
 
 export default router;

@@ -1,6 +1,8 @@
 <template>
   <div>
     ユーザー情報<br />
+    <router-link to="profile">プロフィール</router-link> |
+    <router-link to="post">記事</router-link> |
     <div class="green-b">
       <router-view />
     </div>
