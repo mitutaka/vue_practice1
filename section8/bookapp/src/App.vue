@@ -2,7 +2,9 @@
   <v-app>
     <Header />
     <v-main>
-      <v-container><router-view @add-book-list="addBook" /></v-container>
+      <v-container><router-view
+      :books="books"
+      @add-book-list="addBook" /></v-container>
     </v-main>
     <Footer />
   </v-app>
@@ -38,6 +40,11 @@ export default {
   },
   methods: {
     addBook(e) {
+      // 実際に何かしたことを入力する
+      if (!e) {
+        return;
+      }
+
       this.books.push({
         id: this.books.length,
         title: e.title,
@@ -48,6 +55,9 @@ export default {
       });
       // this.newBook = "";
       this.saveBooks();
+      // 最後に追加したidの取得コード
+      // console.log(this.books.slice(-1)[0].id);
+      this.goToEditPage(this.books.slice(-1)[0].id)
     },
     removeBook(x) {
       this.books.splice(x, 1);
@@ -57,6 +67,9 @@ export default {
       const parsed = JSON.stringify(this.books);
       localStorage.setItem(STORAGE_KEY, parsed);
     },
+    goToEditPage(id){
+      this.$router.push(`/edit/${id}`)
+    }
   },
 };
 </script>
