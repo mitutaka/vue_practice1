@@ -15,7 +15,7 @@
                 :nudge-right="40"
                 transition="scale-transition"
                 offset-y
-                min-width="auto"
+                min-width="290px"
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
@@ -38,7 +38,7 @@
 
               <v-card-actions>
                 <v-btn color="secondary" to="/">一覧に戻る</v-btn>
-                <v-btn color="info">保存する</v-btn>
+                <v-btn color="info" @click="updateBookInfo">保存する</v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -57,18 +57,30 @@ export default {
   data() {
     return {
       book: "",
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: "",
       menu: false,
     };
+  },
+  methods: {
+    updateBookInfo() {
+      this.$emit("update-book-info", {
+        id: this.$route.params.id,
+        readDate: this.date,
+        memo: this.book.memo,
+      });
+    },
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
       // `vm` を通じてコンポーネントインスタンスにアクセス
       vm.$nextTick().then(() => {
         vm.book = vm.books[vm.$route.params.id];
-        console.log(vm.book);
+        if (vm.book.readDate) {
+          vm.date = vm.book.readDate;
+        } else {
+          vm.date = new Date().toISOString().substr(0, 10);
+        }
+        // console.log(vm.book);
       });
     });
   },
