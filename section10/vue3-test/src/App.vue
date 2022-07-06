@@ -8,6 +8,7 @@
     <router-link to="/props-emit-test">PropsEmit</router-link> |
     <router-link to="/function-test">Function</router-link> |
     <router-link to="/router-test">Router</router-link> |
+    <router-link to="/vuex-test">Vuex</router-link> |
   </nav>
   <router-view
     :setupBooks="setupBooks"
